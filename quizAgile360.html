@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agile Expert · Lean Startup · Formation Complète</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+    </script>
+    <style>
+        :root {
+            --navy: #0a1628;
+            --navy-light: #152238;
+            --royal: #1d4ed8;
+            --indigo: #4f46e5;
+            --gold: #f59e0b;
+            --gold-light: #fbbf24;
+            --ice: #f0f6ff;
+            --ice-dark: #e2ebf9;
+            --graphite: #1e293b;
+            --slate: #475569;
+            --silver: #94a3b8;
+            --white: #ffffff;
+            --green: #10b981;
+            --rose: #ef4444;
+            --teal: #0d9488;
+            --shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--ice);
+            color: var(--graphite);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--navy);
+            color: var(--white);
+            padding: 1.8rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            flex-shrink: 0;
+            z-index: 100;
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 1.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 1.8rem;
+        }
+
+        .sidebar-brand i {
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        .sidebar-brand h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .sidebar-brand h1 span {
+            color: var(--gold);
+        }
+
+        .sidebar-brand small {
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: var(--silver);
+            display: block;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .sidebar-nav .nav-section {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--silver);
+            padding: 0.8rem 0.6rem 0.3rem;
+            font-weight: 600;
+            opacity: 0.5;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            color: var(--silver);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .sidebar-nav a i {
+            width: 18px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .sidebar-nav a:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--white);
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(29, 78, 216, 0.25);
+            color: var(--white);
+            box-shadow: inset 3px 0 0 var(--royal);
+        }
+
+        .sidebar-nav a .badge-nav {
+            margin-left: auto;
+            font-size: 0.55rem;
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--gold);
+            padding: 0.1rem 0.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .sidebar-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 1.2rem;
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            color: var(--silver);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sidebar-footer .progress-ring {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-footer .progress-ring svg {
+            width: 32px;
+            height: 32px;
+            transform: rotate(-90deg);
+        }
+
+        .sidebar-footer .progress-ring circle {
+            fill: none;
+            stroke-width: 3;
+            stroke: var(--silver);
+            opacity: 0.15;
+        }
+
+        .sidebar-footer .progress-ring .progress-fill {
+            stroke: var(--gold);
+            opacity: 1;
+            stroke-dasharray: 84;
+            stroke-dashoffset: 84;
+            transition: stroke-dashoffset 0.8s ease;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2.5rem 3rem;
+            max-width: calc(100% - 280px);
+            overflow-y: auto;
+        }
+
+        .section {
+            display: none;
+            animation: fadeUp 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header .icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: var(--royal);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header .subtitle {
+            color: var(--slate);
+            font-size: 0.95rem;
+            margin-top: 2px;
+        }
+
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, var(--royal), var(--indigo), transparent);
+            border-radius: 10px;
+            margin: 1.2rem 0 2rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin: 1.8rem 0;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 1.8rem 0;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 1.8rem 0;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 1.2rem;
+            padding: 1.8rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: all 0.25s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            border-color: rgba(29, 78, 216, 0.15);
+            box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3 i {
+            color: var(--royal);
+            font-size: 1.2rem;
+            width: 28px;
+        }
+
+        .card p {
+            color: var(--slate);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .card .def {
+            background: var(--ice);
+            border-radius: 10px;
+            padding: 0.8rem 1.2rem;
+            margin-top: 0.8rem;
+            border-left: 4px solid var(--royal);
+            font-size: 0.9rem;
+        }
+        .card .def strong {
+            color: var(--navy);
+            display: block;
+            margin-bottom: 2px;
+        }
+        .card .tag {
+            font-size: 0.65rem;
+            background: var(--ice-dark);
+            color: var(--navy);
+            padding: 0.15rem 0.8rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            align-self: flex-start;
+        }
+
+        .card .lean-example {
+            background: #f0fdf4;
+            border-radius: 10px;
+            padding: 0.8rem 1.2rem;
+            margin-top: 0.8rem;
+            border-left: 4px solid var(--teal);
+            font-size: 0.85rem;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1.8rem 0;
+            border-radius: 1.2rem;
+            border: 1px solid #e2e8f0;
+            background: var(--white);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        th {
+            background: var(--navy);
+            color: var(--white);
+            font-weight: 600;
+            padding: 0.8rem 1.2rem;
+            text-align: left;
+        }
+        td {
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #eef2f6;
+        }
+        tr:nth-child(even) {
+            background: #fafcff;
+        }
+
+        .highlight-box {
+            background: #fef9e7;
+            border-left: 6px solid var(--gold);
+            padding: 1.2rem 1.8rem;
+            border-radius: 1rem;
+            margin: 1.2rem 0;
+        }
+        .highlight-box h4 {
+            display: flex;
+            gap: 10px;
+            color: var(--navy);
+        }
+
+        .case-box {
+            background: var(--ice);
+            border-radius: 1rem;
+            padding: 1.2rem 1.8rem;
+            margin: 1rem 0;
+            border-left: 6px solid var(--indigo);
+        }
+        .case-box strong {
+            color: var(--navy);
+        }
+
+        .lean-canvas {
+            background: var(--white);
+            border-radius: 1.2rem;
+            padding: 1.5rem;
+            border: 2px solid var(--teal);
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .lean-canvas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.5rem;
+            min-width: 600px;
+        }
+
+        .lean-canvas-cell {
+            background: var(--ice);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e2e8f0;
+            min-height: 80px;
+        }
+
+        .lean-canvas-cell h5 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--teal);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.3rem;
+        }
+
+        .lean-canvas-cell p {
+            font-size: 0.8rem;
+            color: var(--slate);
+            margin: 0;
+        }
+
+        .lean-canvas-cell.highlight-cell {
+            background: #f0fdf4;
+            border-color: var(--teal);
+        }
+
+        .management-badge {
+            background: #dbeafe;
+            color: var(--royal);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 8px;
+        }
+
+        .teal-badge {
+            background: #ccfbf1;
+            color: var(--teal);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 8px;
+        }
+
+        .quiz-selector {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-selector .quiz-tab {
+            padding: 0.6rem 1.8rem;
+            border-radius: 40px;
+            border: 2px solid #e2e8f0;
+            background: var(--white);
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .quiz-selector .quiz-tab.active {
+            border-color: var(--royal);
+            background: #dbeafe;
+            color: var(--royal);
+        }
+
+        .quiz-selector .quiz-tab:hover {
+            border-color: var(--royal);
+        }
+
+        .quiz-container {
+            background: var(--white);
+            border-radius: 1.8rem;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .quiz-progress {
+            font-weight: 600;
+            color: var(--navy);
+            background: var(--ice);
+            padding: 0.3rem 1.5rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            background: var(--ice);
+            padding: 1.2rem 1.8rem;
+            border-radius: 1.2rem;
+            border-left: 6px solid var(--royal);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+        }
+        .option {
+            background: var(--white);
+            border: 2px solid #e2e8f0;
+            border-radius: 60px;
+            padding: 0.7rem 1.8rem;
+            cursor: pointer;
+            transition: 0.15s;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .option:hover {
+            background: var(--ice);
+            border-color: var(--royal);
+        }
+        .option.selected {
+            background: #dbeafe;
+            border-color: var(--royal);
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+        }
+        .option .letter {
+            background: #eef2f6;
+            border-radius: 40px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        .option.selected .letter {
+            background: var(--royal);
+            color: var(--white);
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.2rem;
+        }
+
+        .btn {
+            background: var(--white);
+            border: 2px solid #e2e8f0;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.15s;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: var(--royal);
+            border-color: var(--royal);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background: #1a3fa8;
+        }
+        .btn-secondary {
+            background: #eef2f6;
+            border-color: #d0d9e3;
+        }
+        .btn-secondary:hover {
+            background: #dce3ec;
+        }
+        .btn-success {
+            background: var(--green);
+            border-color: var(--green);
+            color: var(--white);
+        }
+        .btn-success:hover {
+            background: #059669;
+        }
+        .btn-gold {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--white);
+        }
+        .btn-gold:hover {
+            background: #d97706;
+            border-color: #d97706;
+        }
+        .btn-teal {
+            background: var(--teal);
+            border-color: var(--teal);
+            color: var(--white);
+        }
+        .btn-teal:hover {
+            background: #0f766e;
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .result-box {
+            background: #e2f0e8;
+            padding: 1.2rem 2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #065f46;
+            display: inline-block;
+            font-size: 1.05rem;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--navy);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 999;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast i {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .build-measure-learn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--ice);
+            border-radius: 1.2rem;
+            margin: 1.2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .build-measure-learn .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            border: 2px solid var(--teal);
+            min-width: 120px;
+        }
+
+        .build-measure-learn .step i {
+            font-size: 2rem;
+            color: var(--teal);
+            margin-bottom: 0.3rem;
+        }
+
+        .build-measure-learn .arrow {
+            font-size: 1.5rem;
+            color: var(--teal);
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+                padding: 1.2rem 0.8rem;
+            }
+            .main-content {
+                padding: 1.8rem;
+                max-width: calc(100% - 240px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: 0.8rem 1rem;
+                gap: 0.5rem;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            }
+            .sidebar-brand {
+                padding-bottom: 0;
+                border-bottom: none;
+                margin-bottom: 0;
+                flex: 1;
+            }
+            .sidebar-brand h1 {
+                font-size: 1rem;
+            }
+            .sidebar-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.2rem;
+                flex: 1;
+                justify-content: flex-start;
+            }
+            .sidebar-nav .nav-section {
+                display: none;
+            }
+            .sidebar-nav a {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
+                gap: 4px;
+            }
+            .sidebar-nav a i {
+                font-size: 0.7rem;
+                width: 14px;
+            }
+            .sidebar-nav a .badge-nav {
+                display: none;
+            }
+            .sidebar-footer {
+                display: none;
+            }
+            .main-content {
+                max-width: 100%;
+                padding: 1.2rem;
+            }
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .lean-canvas-grid {
+                grid-template-columns: 1fr 1fr;
+                min-width: auto;
+            }
+            .build-measure-learn {
+                flex-direction: column;
+            }
+            .build-measure-learn .arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <i class="fas fa-code-branch"></i>
+            <div>
+                <h1>Agile<span>Expert</span></h1>
+                <small>Formation complète v5.0</small>
+            </div>
+        </div>
+        <nav class="sidebar-nav" id="sidebarNav">
+            <div class="nav-section">Fondamentaux</div>
+            <a href="#" data-section="fundamentals" class="active"><i class="fas fa-book-open"></i> Fondamentaux</a>
+            <a href="#" data-section="manifeste"><i class="fas fa-scroll"></i> Manifeste Agile</a>
+            <a href="#" data-section="roles"><i class="fas fa-users"></i> Rôles & Management</a>
+            <a href="#" data-section="events"><i class="fas fa-calendar-alt"></i> Événements</a>
+            <a href="#" data-section="artefacts"><i class="fas fa-boxes"></i> Artefacts & DoD</a>
+
+            <div class="nav-section">Méthodes avancées</div>
+            <a href="#" data-section="lean-startup"><i class="fas fa-rocket"></i> Lean Startup</a>
+            <a href="#" data-section="design-thinking"><i class="fas fa-lightbulb"></i> Design Thinking</a>
+            <a href="#" data-section="kanban"><i class="fas fa-columns"></i> Kanban</a>
+            <a href="#" data-section="scaling"><i class="fas fa-expand-arrows-alt"></i> Scaling (SAFe/LeSS)</a>
+
+            <div class="nav-section">Pratique & Management</div>
+            <a href="#" data-section="user-stories"><i class="fas fa-user-edit"></i> User Stories</a>
+            <a href="#" data-section="estimation"><i class="fas fa-chart-simple"></i> Estimation</a>
+            <a href="#" data-section="management"><i class="fas fa-chess-queen"></i> Management Agile</a>
+            <a href="#" data-section="metrics"><i class="fas fa-chart-line"></i> Métriques & KPIs</a>
+            <a href="#" data-section="retrospectives"><i class="fas fa-undo-alt"></i> Rétrospectives</a>
+            <a href="#" data-section="comparatif"><i class="fas fa-table"></i> Tableaux comparatifs</a>
+            <a href="#" data-section="cas-pratiques"><i class="fas fa-briefcase"></i> Cas pratiques</a>
+            <a href="#" data-section="glossaire"><i class="fas fa-book"></i> Glossaire</a>
+
+            <div class="nav-section">Quiz</div>
+            <a href="#" data-section="quiz"><i class="fas fa-question-circle"></i> Quiz <span class="badge-nav">3</span></a>
+        </nav>
+        <div class="sidebar-footer">
+            <span>v5.0 · Expert</span>
+            <div class="progress-ring">
+                <svg viewBox="0 0 40 40">
+                    <circle cx="20" cy="20" r="14" />
+                    <circle class="progress-fill" cx="20" cy="20" r="14" id="progressCircle" />
+                </svg>
+                <span id="progressText">0%</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <!-- ============ SECTION : FUNDAMENTALS ============ -->
+        <section id="section-fundamentals" class="section active">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-book-open"></i></div>
+                <div>
+                    <h2>Fondamentaux Agile & Scrum</h2>
+                    <div class="subtitle">Les bases essentielles pour maîtriser l'Agilité</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fab fa-agile"></i> Agile</h3>
+                    <p><strong>Définition :</strong> L'Agile est une philosophie de développement logiciel basée sur l'itération, la collaboration et l'adaptation au changement. Elle privilégie la livraison rapide de valeur.</p>
+                    <div class="def">
+                        <strong><i class="fas fa-quote-left"></i> 4 valeurs du Manifeste Agile :</strong>
+                        <ul style="margin-left:1.2rem; list-style-type:disc; font-size:0.9rem;">
+                            <li><strong>Individus et interactions</strong> > processus et outils</li>
+                            <li><strong>Logiciels opérationnels</strong> > documentation exhaustive</li>
+                            <li><strong>Collaboration client</strong> > négociation contractuelle</li>
+                            <li><strong>Adaptation au changement</strong> > suivi d'un plan</li>
+                        </ul>
+                    </div>
+                    <span class="tag"><i class="fas fa-check-circle"></i> 4 valeurs, 12 principes</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-tasks"></i> Scrum</h3>
+                    <p><strong>Définition :</strong> Framework léger pour résoudre des problèmes complexes tout en livrant itérativement des produits de grande valeur.</p>
+                    <div class="def">
+                        <strong><i class="fas fa-flag-checkered"></i> 3 piliers de Scrum :</strong>
+                        <ul style="margin-left:1.2rem; list-style-type:disc; font-size:0.9rem;">
+                            <li><strong>Transparence :</strong> Le processus et le travail sont visibles.</li>
+                            <li><strong>Inspection :</strong> L'équipe vérifie régulièrement l'avancement.</li>
+                            <li><strong>Adaptation :</strong> Ajustements rapides en cas d'écart.</li>
+                        </ul>
+                    </div>
+                    <span class="tag"><i class="fas fa-sync-alt"></i> Framework itératif</span>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-chess-queen"></i> Les 5 valeurs Scrum</h4>
+                <div style="display:flex; flex-wrap:wrap; gap:1rem; margin-top:0.5rem;">
+                    <span style="background:var(--white); padding:0.3rem 1.2rem; border-radius:30px; font-weight:600;"><i class="fas fa-heart" style="color:#c0392b;"></i> Courage</span>
+                    <span style="background:var(--white); padding:0.3rem 1.2rem; border-radius:30px; font-weight:600;"><i class="fas fa-eye" style="color:#2980b9;"></i> Focus</span>
+                    <span style="background:var(--white); padding:0.3rem 1.2rem; border-radius:30px; font-weight:600;"><i class="fas fa-handshake" style="color:#27ae60;"></i> Engagement</span>
+                    <span style="background:var(--white); padding:0.3rem 1.2rem; border-radius:30px; font-weight:600;"><i class="fas fa-people-arrows" style="color:#8e44ad;"></i> Respect</span>
+                    <span style="background:var(--white); padding:0.3rem 1.2rem; border-radius:30px; font-weight:600;"><i class="fas fa-bullseye" style="color:#d35400;"></i> Ouverture</span>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Critère</th><th>Approche Agile</th><th>Approche Traditionnelle</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Cycle de vie</strong></td><td>Itératif et incrémental</td><td>Séquentiel (Waterfall)</td></tr>
+                        <tr><td><strong>Exigences</strong></td><td>Évolutives, adaptatives</td><td>Figées, définies en amont</td></tr>
+                        <tr><td><strong>Livraison</strong></td><td>Fréquente (chaque Sprint)</td><td>Unique à la fin</td></tr>
+                        <tr><td><strong>Implication client</strong></td><td>Continue et collaborative</td><td>Limitée (début et fin)</td></tr>
+                        <tr><td><strong>Gestion du changement</strong></td><td>Intégrée, flexible</td><td>Complexe, coûteuse</td></tr>
+                        <tr><td><strong>Documentation</strong></td><td>Juste nécessaire, vivante</td><td>Exhaustive, lourde</td></tr>
+                        <tr><td><strong>Risques</strong></td><td>Réduits par les itérations</td><td>Détectés tardivement</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : MANIFESTE ============ -->
+        <section id="section-manifeste" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-scroll"></i></div>
+                <div>
+                    <h2>Manifeste Agile</h2>
+                    <div class="subtitle">Les 12 principes qui fondent l'Agilité</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-3">
+                <div class="card"><h3><i class="fas fa-1"></i> 1-4</h3>
+                    <p><strong>1.</strong> Satisfaire le client par des livraisons précoces et continues.</p>
+                    <p><strong>2.</strong> Accueillir les changements, même tardifs.</p>
+                    <p><strong>3.</strong> Livrer fréquemment (de quelques semaines à quelques mois).</p>
+                    <p><strong>4.</strong> Collaboration quotidienne entre métier et développeurs.</p>
+                </div>
+                <div class="card"><h3><i class="fas fa-2"></i> 5-8</h3>
+                    <p><strong>5.</strong> Équipes motivées : leur donner l'environnement et le soutien.</p>
+                    <p><strong>6.</strong> Communication face à face : la méthode la plus efficace.</p>
+                    <p><strong>7.</strong> Progrès mesuré par les livrables opérationnels.</p>
+                    <p><strong>8.</strong> Rythme soutenable : l'équipe doit pouvoir tenir indéfiniment.</p>
+                </div>
+                <div class="card"><h3><i class="fas fa-3"></i> 9-12</h3>
+                    <p><strong>9.</strong> Excellence technique et bonne conception améliorent l'agilité.</p>
+                    <p><strong>10.</strong> Simplicité : maximisez le travail non fait.</p>
+                    <p><strong>11.</strong> Auto-organisation : les meilleures architectures émergent.</p>
+                    <p><strong>12.</strong> Réflexion régulière pour s'ajuster et s'améliorer.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-history"></i> Contexte historique</h4>
+                <p>Le Manifeste Agile a été rédigé en février 2001 par 17 experts du développement logiciel réunis à Snowbird, Utah. Ils cherchaient une alternative aux méthodes lourdes et rigides. Le document original tient sur une page et a révolutionné le monde du développement.</p>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : ROLES & MANAGEMENT ============ -->
+        <section id="section-roles" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-users"></i></div>
+                <div>
+                    <h2>Rôles Scrum & Management</h2>
+                    <div class="subtitle">Product Owner, Scrum Master, Developers — avec perspective managériale</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3><i class="fas fa-user-cog"></i> Product Owner <span class="management-badge">Management</span></h3>
+                    <p><strong>Définition :</strong> Responsable de maximiser la valeur du produit. Seul décisionnaire pour le Product Backlog.</p>
+                    <div class="def">
+                        <strong>Responsabilités managériales :</strong>
+                        <ul style="margin-left:1rem; list-style-type:disc; font-size:0.9rem;">
+                            <li>Définir et communiquer la vision produit</li>
+                            <li>Prioriser le backlog en fonction de la valeur business</li>
+                            <li>Gérer les attentes des parties prenantes</li>
+                            <li>Prendre les décisions de investissement</li>
+                            <li>Valider les livrables et accepter ou rejeter</li>
+                        </ul>
+                    </div>
+                    <span class="tag"><i class="fas fa-chess-queen"></i> Stratège produit</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-users-cog"></i> Scrum Master <span class="management-badge">Leadership</span></h3>
+                    <p><strong>Définition :</strong> Facilitateur et coach qui aide l'équipe à comprendre et appliquer Scrum. Élimine les obstacles.</p>
+                    <div class="def">
+                        <strong>Responsabilités managériales :</strong>
+                        <ul style="margin-left:1rem; list-style-type:disc; font-size:0.9rem;">
+                            <li>Coacher l'équipe et l'organisation</li>
+                            <li>Faciliter les événements Scrum</li>
+                            <li>Supprimer les impediments</li>
+                            <li>Protéger l'équipe des interférences</li>
+                            <li>Favoriser l'auto-organisation</li>
+                        </ul>
+                    </div>
+                    <span class="tag"><i class="fas fa-hand-holding-heart"></i> Servant-leader</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-user-friends"></i> Developers <span class="management-badge">Auto-organisation</span></h3>
+                    <p><strong>Définition :</strong> Professionnels qui créent l'Incément. Auto-organisés et cross-fonctionnels.</p>
+                    <div class="def">
+                        <strong>Responsabilités managériales :</strong>
+                        <ul style="margin-left:1rem; list-style-type:disc; font-size:0.9rem;">
+                            <li>Gérer leur propre charge de travail</li>
+                            <li>Prendre des décisions techniques collectives</li>
+                            <li>Assurer la qualité (DoD)</li>
+                            <li>Participer à la planification et estimation</li>
+                            <li>S'engager sur l'Objectif de Sprint</li>
+                        </ul>
+                    </div>
+                    <span class="tag"><i class="fas fa-code"></i> Polyvalents</span>
+                </div>
+            </div>
+
+            <div style="background:var(--ice); border-radius:1.2rem; padding:1.5rem 2rem; margin-top:1.2rem; border:1px solid #dce6f0;">
+                <h4 style="display:flex; gap:12px;"><i class="fas fa-people-arrows" style="color:var(--royal);"></i> Interactions managériales</h4>
+                <ul style="margin-left:1.8rem; color:var(--slate);">
+                    <li><strong>PO ↔ Developers :</strong> Clarification des exigences, estimations, feedback — le PO manage le "quoi", les Devs le "comment"</li>
+                    <li><strong>SM ↔ PO :</strong> Aide à la gestion du backlog et à la communication avec les parties prenantes</li>
+                    <li><strong>SM ↔ Developers :</strong> Facilitation de l'auto-organisation, suppression des obstacles — le SM manage l'environnement</li>
+                    <li><strong>Management ↔ Scrum :</strong> Le management soutient l'équipe, fournit les ressources et élimine les obstacles organisationnels</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : EVENTS ============ -->
+        <section id="section-events" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-calendar-alt"></i></div>
+                <div>
+                    <h2>Événements Scrum</h2>
+                    <div class="subtitle">Les 5 cérémonies du framework</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-flag"></i> Sprint</h3>
+                    <p><strong>Définition :</strong> Période fixe (≤ 1 mois) durant laquelle un Incrément "Terminé" est créé.</p>
+                    <div class="def"><strong>Durée :</strong> 1 à 4 semaines (idéalement 2 semaines).</div>
+                    <div class="def"><strong>Objectif :</strong> Livrer un incrément potentiellement livrable.</div>
+                    <span class="tag"><i class="fas fa-hourglass-half"></i> Cadence régulière</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-clipboard-list"></i> Sprint Planning</h3>
+                    <p><strong>Définition :</strong> Événement qui lance le Sprint. Définit ce qui peut être livré et comment.</p>
+                    <div class="def"><strong>Durée max :</strong> 8h pour un Sprint d'1 mois.</div>
+                    <div class="def"><strong>Résultat :</strong> Sprint Backlog + Objectif de Sprint.</div>
+                    <span class="tag"><i class="fas fa-tasks"></i> Planification</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-coffee"></i> Daily Scrum</h3>
+                    <p><strong>Définition :</strong> Réunion quotidienne de 15 min pour inspecter l'avancement.</p>
+                    <div class="def"><strong>Questions :</strong> Hier ? Aujourd'hui ? Obstacles ?</div>
+                    <div class="def"><strong>Participants :</strong> Uniquement les Developers.</div>
+                    <span class="tag"><i class="fas fa-clock"></i> 15 min max</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-chart-line"></i> Sprint Review</h3>
+                    <p><strong>Définition :</strong> Fin de Sprint pour inspecter l'Incrément et adapter le Product Backlog.</p>
+                    <div class="def"><strong>Durée max :</strong> 4h pour un Sprint d'1 mois.</div>
+                    <div class="def"><strong>Résultat :</strong> Product Backlog mis à jour.</div>
+                    <span class="tag"><i class="fas fa-users"></i> Collaboration</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-sync-alt"></i> Rétrospective</h3>
+                    <p><strong>Définition :</strong> Événement pour inspecter et adapter le processus.</p>
+                    <div class="def"><strong>Durée max :</strong> 3h pour un Sprint d'1 mois.</div>
+                    <div class="def"><strong>Résultat :</strong> Plan d'action pour le prochain Sprint.</div>
+                    <span class="tag"><i class="fas fa-undo-alt"></i> Amélioration continue</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : ARTEFACTS & DoD ============ -->
+        <section id="section-artefacts" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-boxes"></i></div>
+                <div>
+                    <h2>Artefacts Scrum & DoD</h2>
+                    <div class="subtitle">Product Backlog, Sprint Backlog, Incrément — avec focus sur la Definition of Done</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> Product Backlog</h3>
+                    <p>Liste ordonnée de tout ce qui est nécessaire dans le produit. Dynamique et priorisé par valeur.</p>
+                    <div class="def"><strong>Engagement :</strong> Objectif de produit — la vision à long terme.</div>
+                    <div class="def"><strong>Propriétaire :</strong> Product Owner.</div>
+                    <div class="def"><strong>Bonnes pratiques :</strong> Refinement régulier (5-10% du temps), découpage en stories.</div>
+                    <span class="tag">Artefact principal</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-tasks"></i> Sprint Backlog</h3>
+                    <p>Ensemble des éléments sélectionnés pour le Sprint, plus un plan pour les réaliser.</p>
+                    <div class="def"><strong>Engagement :</strong> Objectif de Sprint — le but du Sprint.</div>
+                    <div class="def"><strong>Propriétaire :</strong> Developers.</div>
+                    <div class="def"><strong>Bonnes pratiques :</strong> Mise à jour quotidienne, visualisation (tableau Kanban).</div>
+                    <span class="tag">Artefact du Sprint</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-cube"></i> Incrément</h3>
+                    <p>Somme de tous les éléments du Product Backlog terminés selon la DoD.</p>
+                    <div class="def"><strong>Engagement :</strong> Definition of Done (DoD) — critères de qualité.</div>
+                    <div class="def"><strong>Caractéristique :</strong> Potentiellement livrable.</div>
+                    <span class="tag">Livrable</span>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-check-circle"></i> Definition of Done (DoD) — Approfondissement</h4>
+                <p>La DoD est un engagement partagé par l'équipe. Elle définit ce qui est nécessaire pour qu'un élément soit considéré comme "Terminé".</p>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0.8rem; margin-top:1rem;">
+                    <div style="background:var(--white); padding:0.8rem 1rem; border-radius:12px; border:1px solid #e2e8f0;">
+                        <strong style="color:var(--royal);">Niveau 1 :</strong>
+                        <ul style="font-size:0.85rem; margin-left:1rem;">
+                            <li>Code testé unitairement</li>
+                            <li>Code review effectué</li>
+                        </ul>
+                    </div>
+                    <div style="background:var(--white); padding:0.8rem 1rem; border-radius:12px; border:1px solid #e2e8f0;">
+                        <strong style="color:var(--royal);">Niveau 2 :</strong>
+                        <ul style="font-size:0.85rem; margin-left:1rem;">
+                            <li>Tests d'intégration passés</li>
+                            <li>Documentation mise à jour</li>
+                        </ul>
+                    </div>
+                    <div style="background:var(--white); padding:0.8rem 1rem; border-radius:12px; border:1px solid #e2e8f0;">
+                        <strong style="color:var(--royal);">Niveau 3 :</strong>
+                        <ul style="font-size:0.85rem; margin-left:1rem;">
+                            <li>Tests fonctionnels validés</li>
+                            <li>Déploiement en préproduction</li>
+                            <li>Acceptation par le PO</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : LEAN STARTUP ============ -->
+        <section id="section-lean-startup" class="section">
+            <div class="section-header">
+                <div class="icon-box" style="background:var(--teal);"><i class="fas fa-rocket"></i></div>
+                <div>
+                    <h2>Lean Startup</h2>
+                    <div class="subtitle">Construire des produits que les clients veulent vraiment</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-lightbulb"></i> Qu'est-ce que le Lean Startup ?</h3>
+                    <p><strong>Définition :</strong> Méthodologie pour développer des produits et des entreprises en réduisant les risques et en accélérant l'apprentissage. Créée par Eric Ries.</p>
+                    <div class="def">
+                        <strong>Principes clés :</strong>
+                        <ul style="margin-left:1rem; list-style-type:disc; font-size:0.9rem;">
+                            <li><strong>Build-Measure-Learn :</strong> Boucle d'apprentissage accélérée</li>
+                            <li><strong>MVP (Minimum Viable Product) :</strong> Version minimaliste pour tester</li>
+                            <li><strong>Pivot ou Persevere :</strong> Décision stratégique basée sur les données</li>
+                            <li><strong>Apprentissage validé :</strong> Mesurer ce qui est vraiment important</li>
+                        </ul>
+                    </div>
+                    <span class="tag"><i class="fas fa-innovation"></i> Innovation continue</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-sync-alt"></i> La boucle Build-Measure-Learn</h3>
+                    <div class="build-measure-learn">
+                        <div class="step"><i class="fas fa-code"></i><strong>BUILD</strong><span style="font-size:0.7rem; color:var(--slate);">Construire le MVP</span></div>
+                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="step"><i class="fas fa-chart-bar"></i><strong>MEASURE</strong><span style="font-size:0.7rem; color:var(--slate);">Mesurer les données</span></div>
+                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="step"><i class="fas fa-graduation-cap"></i><strong>LEARN</strong><span style="font-size:0.7rem; color:var(--slate);">Apprendre et itérer</span></div>
+                        <div class="arrow"><i class="fas fa-arrow-left"></i></div>
+                        <div style="font-size:0.8rem; color:var(--teal); font-weight:600;">⟳</div>
+                    </div>
+                    <div class="def"><strong>Objectif :</strong> Réduire le temps de cycle de l'apprentissage pour valider ou infirmer les hypothèses.</div>
+                    <span class="tag"><i class="fas fa-undo"></i> Itératif</span>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-flag"></i> Lean Canvas — 9 blocs</h4>
+                <p>Le Lean Canvas est un outil stratégique pour décrire un modèle d'affaires de manière concise et orientée action.</p>
+            </div>
+
+            <div class="lean-canvas">
+                <div class="lean-canvas-grid">
+                    <div class="lean-canvas-cell highlight-cell">
+                        <h5>1. Problème</h5>
+                        <p>Quels problèmes résout-on ? Quelles sont les frustrations des clients ?</p>
+                    </div>
+                    <div class="lean-canvas-cell highlight-cell">
+                        <h5>2. Solution</h5>
+                        <p>Quelle est notre solution ? Quelle est notre proposition de valeur unique ?</p>
+                    </div>
+                    <div class="lean-canvas-cell highlight-cell">
+                        <h5>3. Métriques clés</h5>
+                        <p>Comment mesurons-nous le succès ? Quels KPIs suivons-nous ?</p>
+                    </div>
+                    <div class="lean-canvas-cell">
+                        <h5>4. Proposition de valeur</h5>
+                        <p>Pourquoi les clients nous choisissent-ils ? Quel est l'avantage unique ?</p>
+                    </div>
+                    <div class="lean-canvas-cell">
+                        <h5>5. Avantage concurrentiel</h5>
+                        <p>Qu'est-ce qui nous rend difficiles à copier ? Notre "moat" concurrentiel.</p>
+                    </div>
+                    <div class="lean-canvas-cell">
+                        <h5>6. Canaux</h5>
+                        <p>Comment atteignons-nous nos clients ? Quels canaux de distribution utilisons-nous ?</p>
+                    </div>
+                    <div class="lean-canvas-cell">
+                        <h5>7. Segments clients</h5>
+                        <p>Qui sont nos clients cibles ? Quels sont leurs besoins spécifiques ?</p>
+                    </div>
+                    <div class="lean-canvas-cell">
+                        <h5>8. Structure de coûts</h5>
+                        <p>Quels sont nos coûts fixes et variables ? Quelles sont nos dépenses clés ?</p>
+                    </div>
+                    <div class="lean-canvas-cell">
+                        <h5>9. Flux de revenus</h5>
+                        <p>Comment générons-nous des revenus ? Quels sont nos modèles de monétisation ?</p>
+                    </div>
+                </div>
+                <div style="text-align:center; margin-top:0.8rem; font-size:0.8rem; color:var(--slate);">
+                    <i class="fas fa-edit"></i> Lean Canvas — Adapté du Business Model Canvas pour les startups
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-flask"></i> MVP — Minimum Viable Product</h3>
+                    <p><strong>Définition :</strong> Version minimaliste d'un produit qui permet de recueillir un maximum d'apprentissage validé avec le moins d'effort.</p>
+                    <div class="def">
+                        <strong>Exemples de MVPs :</strong>
+                        <ul style="margin-left:1rem; list-style-type:disc; font-size:0.9rem;">
+                            <li>Page de destination (landing page)</li>
+                            <li>Prototype interactif (mockup)</li>
+                            <li>Video de démonstration</li>
+                            <li>Service "Concierge" (manuel)</li>
+                            <li>Produit "Wizard of Oz" (faussement automatisé)</li>
+                        </ul>
+                    </div>
+                    <span class="tag"><i class="fas fa-flask"></i> Apprentissage</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-random"></i> Pivot ou Persevere</h3>
+                    <p><strong>Définition :</strong> Décision stratégique basée sur les données recueillies : soit on pivote (changer de stratégie), soit on persévère (continuer).</p>
+                    <div class="def">
+                        <strong>Types de pivots :</strong>
+                        <ul style="margin-left:1rem; list-style-type:disc; font-size:0.9rem;">
+                            <li><strong>Zoom-in :</strong> Une fonctionnalité devient le produit</li>
+                            <li><strong>Zoom-out :</strong> Le produit devient une fonctionnalité</li>
+                            <li><strong>Segmentation :</strong> Changer de segment client</li>
+                            <li><strong>Pivot de valeur :</strong> Proposition de valeur différente</li>
+                            <li><strong>Pivot de canal :</strong> Changer de canal de distribution</li>
+                        </ul>
+                    </div>
+                    <span class="tag"><i class="fas fa-gavel"></i> Décision</span>
+                </div>
+            </div>
+
+            <div class="case-box" style="border-left-color:var(--teal);">
+                <strong><i class="fas fa-store"></i> Cas pratique Lean Startup : Dropbox</strong>
+                <p><strong>Problème :</strong> Les gens ont du mal à synchroniser leurs fichiers entre plusieurs appareils.</p>
+                <p><strong>MVP :</strong> Une vidéo de démonstration de 3 minutes (au lieu de construire le produit complet).</p>
+                <p><strong>Résultat :</strong> La vidéo a généré 75 000 inscriptions en une nuit, validant la demande.</p>
+                <p><strong>Leçon :</strong> Un MVP peut être une vidéo ou une landing page — l'important est de tester les hypothèses.</p>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : DESIGN THINKING ============ -->
+        <section id="section-design-thinking" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-lightbulb"></i></div>
+                <div>
+                    <h2>Design Thinking</h2>
+                    <div class="subtitle">Approche centrée sur l'humain</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-empathize"></i> Qu'est-ce que le Design Thinking ?</h3>
+                    <p><strong>Définition :</strong> Approche de résolution de problèmes centrée sur l'humain, utilisant la créativité et l'empathie pour concevoir des solutions innovantes.</p>
+                    <div class="def"><strong>Objectif :</strong> Créer des produits désirables, faisables et viables.</div>
+                    <div class="def"><strong>Outils clés :</strong> Empathy maps, personas, journey maps, How Might We, Crazy 8s, storyboards.</div>
+                    <span class="tag"><i class="fas fa-innovation"></i> Centré utilisateur</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-route"></i> Les 5 phases</h3>
+                    <ul style="margin-left:1.2rem; list-style-type:decimal; color:var(--slate);">
+                        <li><strong>Empathiser :</strong> Comprendre les utilisateurs (observations, entretiens).</li>
+                        <li><strong>Définir :</strong> Synthétiser les besoins pour formuler un point de vue.</li>
+                        <li><strong>Idéer :</strong> Générer un grand nombre d'idées créatives.</li>
+                        <li><strong>Prototyper :</strong> Réaliser des versions rapides et tangibles.</li>
+                        <li><strong>Tester :</strong> Valider les prototypes auprès des utilisateurs.</li>
+                    </ul>
+                    <span class="tag"><i class="fas fa-undo"></i> Itératif</span>
+                </div>
+            </div>
+
+            <div style="background:var(--ice); border-radius:1.2rem; padding:1.5rem; margin:1.2rem 0;">
+                <h4><i class="fas fa-link"></i> Complémentarité avec Agile et Lean Startup</h4>
+                <p><strong>Design Thinking</strong> définit le bon produit (découverte).<br>
+                    <strong>Lean Startup</strong> valide les hypothèses avec des MVPs.<br>
+                    <strong>Agile</strong> construit le produit de la bonne manière (livraison).</p>
+                <p style="margin-top:0.5rem; font-weight:500;">Ensemble, ils forment un système complet d'innovation et de livraison.</p>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : KANBAN ============ -->
+        <section id="section-kanban" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-columns"></i></div>
+                <div>
+                    <h2>Kanban</h2>
+                    <div class="subtitle">Méthode de gestion de flux</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-flag"></i> Principes fondamentaux</h3>
+                    <ul style="margin-left:1.2rem; list-style-type:disc; color:var(--slate);">
+                        <li><strong>Visualiser</strong> le flux de travail (tableau Kanban).</li>
+                        <li><strong>Limiter</strong> le travail en cours (WIP).</li>
+                        <li><strong>Gérer</strong> le flux pour optimiser la livraison.</li>
+                        <li><strong>Rendre</strong> les politiques explicites.</li>
+                        <li><strong>Améliorer</strong> en continu avec des métriques.</li>
+                    </ul>
+                    <span class="tag"><i class="fas fa-tachometer-alt"></i> Flux continu</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-tasks"></i> Kanban vs Scrum</h3>
+                    <div class="def"><strong>Kanban :</strong> Flux continu, pas de Sprints, WIP limité, changements en continu.</div>
+                    <div class="def"><strong>Scrum :</strong> Sprints, rôles définis, planification, rétrospectives.</div>
+                    <p style="margin-top:0.5rem;">Les deux peuvent être combinés : <strong>Scrumban</strong>.</p>
+                    <span class="tag"><i class="fas fa-random"></i> Complémentaire</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : SCALING ============ -->
+        <section id="section-scaling" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-expand-arrows-alt"></i></div>
+                <div>
+                    <h2>Scaling Agile</h2>
+                    <div class="subtitle">SAFe, LeSS, Nexus</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3><i class="fas fa-building"></i> SAFe</h3>
+                    <p><strong>Scaled Agile Framework :</strong> Le framework le plus populaire pour le scaling Agile. Il propose des niveaux : équipe, programme, portfolio.</p>
+                    <div class="def"><strong>Principales caractéristiques :</strong> PI Planning (Program Increment), Agile Release Train, inspect & adapt.</div>
+                    <span class="tag">Le plus utilisé</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-users"></i> LeSS</h3>
+                    <p><strong>Large-Scale Scrum :</strong> Framework qui étend Scrum à plusieurs équipes. Reste fidèle aux principes Scrum.</p>
+                    <div class="def"><strong>Principales caractéristiques :</strong> Un seul Product Backlog, une seule DoD, des Sprints synchronisés.</div>
+                    <span class="tag">Scrum pur</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-link"></i> Nexus</h3>
+                    <p><strong>Nexus :</strong> Framework officiel de Scrum.org pour le scaling. Ajoute des rôles (Nexus Integration Team) et des événements.</p>
+                    <div class="def"><strong>Principales caractéristiques :</strong> Nexus Sprint Planning, Nexus Daily, Nexus Review, Nexus Retrospective.</div>
+                    <span class="tag">Scrum.org</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : USER STORIES ============ -->
+        <section id="section-user-stories" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-user-edit"></i></div>
+                <div>
+                    <h2>User Stories</h2>
+                    <div class="subtitle">Écrire des histoires utilisateur efficaces</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-pen-fancy"></i> Format standard</h3>
+                    <div style="background:var(--ice); padding:0.8rem 1.2rem; border-radius:10px; font-family:'JetBrains Mono', monospace; font-size:0.9rem; margin:0.5rem 0;">
+                        En tant que [utilisateur],<br>
+                        Je veux [action],<br>
+                        Afin de [bénéfice].
+                    </div>
+                    <div class="def"><strong>Exemple :</strong> En tant que client, je veux pouvoir payer par carte, afin de finaliser mes achats rapidement.</div>
+                    <span class="tag"><i class="fas fa-list-check"></i> INVEST</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-check-double"></i> Critères d'acceptation</h3>
+                    <p>Les critères d'acceptation définissent les conditions de validation d'une user story. Ils sont écrits en langage naturel et sont testables.</p>
+                    <div class="def"><strong>Exemple :</strong>
+                        <ul style="margin-left:1rem; list-style-type:disc; font-size:0.9rem;">
+                            <li>Le paiement est accepté avec CB, Visa, Mastercard.</li>
+                            <li>Un email de confirmation est envoyé.</li>
+                            <li>Le montant est débité du compte.</li>
+                        </ul>
+                    </div>
+                    <span class="tag"><i class="fas fa-clipboard-check"></i> Testable</span>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-asterisk"></i> Le critère INVEST</h4>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:0.5rem; margin-top:0.5rem;">
+                    <span style="background:var(--white); padding:0.3rem 1rem; border-radius:30px; font-weight:600;">I - Indépendante</span>
+                    <span style="background:var(--white); padding:0.3rem 1rem; border-radius:30px; font-weight:600;">N - Négociable</span>
+                    <span style="background:var(--white); padding:0.3rem 1rem; border-radius:30px; font-weight:600;">V - Valeur</span>
+                    <span style="background:var(--white); padding:0.3rem 1rem; border-radius:30px; font-weight:600;">E - Estimable</span>
+                    <span style="background:var(--white); padding:0.3rem 1rem; border-radius:30px; font-weight:600;">S - Suffisamment petite</span>
+                    <span style="background:var(--white); padding:0.3rem 1rem; border-radius:30px; font-weight:600;">T - Testable</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : ESTIMATION ============ -->
+        <section id="section-estimation" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-chart-simple"></i></div>
+                <div>
+                    <h2>Estimation Agile</h2>
+                    <div class="subtitle">Story points, Planning Poker, T-shirt sizing</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3><i class="fas fa-dice"></i> Story Points</h3>
+                    <p><strong>Définition :</strong> Unité relative pour estimer l'effort, la complexité et l'incertitude d'une user story.</p>
+                    <div class="def"><strong>Échelle :</strong> Fibonacci (1, 2, 3, 5, 8, 13, 21) ou T-shirt (XS, S, M, L, XL).</div>
+                    <span class="tag"><i class="fas fa-ruler"></i> Relative</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-people-group"></i> Planning Poker</h3>
+                    <p><strong>Définition :</strong> Technique d'estimation collaborative où chaque membre de l'équipe vote avec des cartes.</p>
+                    <div class="def"><strong>Processus :</strong> Discussion, vote simultané, débat si désaccord, re-vote.</div>
+                    <span class="tag"><i class="fas fa-gavel"></i> Consensus</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-tshirt"></i> T-shirt Sizing</h3>
+                    <p><strong>Définition :</strong> Méthode de catégorisation des user stories par taille (XS, S, M, L, XL).</p>
+                    <div class="def"><strong>Avantage :</strong> Rapide, idéal pour des priorités initiales.</div>
+                    <span class="tag"><i class="fas fa-shirt"></i> Categorisation</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : MANAGEMENT AGILE ============ -->
+        <section id="section-management" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-chess-queen"></i></div>
+                <div>
+                    <h2>Management Agile</h2>
+                    <div class="subtitle">Leadership, culture, transformation</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-crown"></i> Leadership Agile</h3>
+                    <p><strong>Définition :</strong> Style de leadership basé sur la confiance, l'empowerment et la facilitation.</p>
+                    <div class="def"><strong>Principes :</strong> Servant-leadership, coaching, prise de décision décentralisée.</div>
+                    <span class="tag"><i class="fas fa-people-group"></i> Leadership</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-sync-alt"></i> Transformation Agile</h3>
+                    <p><strong>Définition :</strong> Processus de transition d'une organisation vers des pratiques Agile.</p>
+                    <div class="def"><strong>Étapes :</strong> Diagnostic, formation, pilote, extension, transformation culturelle.</div>
+                    <span class="tag"><i class="fas fa-rocket"></i> Changement</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-handshake"></i> Culture Agile</h3>
+                    <p><strong>Définition :</strong> Ensemble de valeurs, croyances et comportements qui soutiennent l'Agilité.</p>
+                    <div class="def"><strong>Caractéristiques :</strong> Confiance, collaboration, apprentissage continu, innovation.</div>
+                    <span class="tag"><i class="fas fa-heart"></i> Culture</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-chart-bar"></i> OKRs & Agilité</h3>
+                    <p><strong>OKRs :</strong> Objectives and Key Results — méthode de définition d'objectifs alignée avec l'Agilité.</p>
+                    <div class="def"><strong>Lien :</strong> OKRs définissent la stratégie, Sprints réalisent les OKRs.</div>
+                    <span class="tag"><i class="fas fa-bullseye"></i> Alignement</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : METRICS ============ -->
+        <section id="section-metrics" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-chart-line"></i></div>
+                <div>
+                    <h2>Métriques & KPIs</h2>
+                    <div class="subtitle">Burndown, Burnup, CFD, Vélocité</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-fire"></i> Burndown</h3>
+                    <p><strong>Définition :</strong> Graphique montrant le travail restant dans un Sprint en fonction du temps.</p>
+                    <div class="def"><strong>Utilité :</strong> Visualiser la progression et détecter les retards.</div>
+                    <span class="tag"><i class="fas fa-arrow-down"></i> Travail restant</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-fire"></i> Burnup</h3>
+                    <p><strong>Définition :</strong> Graphique montrant le travail accompli par rapport au travail total.</p>
+                    <div class="def"><strong>Utilité :</strong> Mesurer l'avancement global du projet.</div>
+                    <span class="tag"><i class="fas fa-arrow-up"></i> Travail accompli</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-water"></i> Cumulative Flow</h3>
+                    <p><strong>Définition :</strong> Graphique montrant le flux des items à travers les étapes du processus.</p>
+                    <div class="def"><strong>Utilité :</strong> Identifier les goulots d'étranglement.</div>
+                    <span class="tag"><i class="fas fa-chart-area"></i> Flux</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-tachometer-alt"></i> Vélocité</h3>
+                    <p><strong>Définition :</strong> Quantité de travail réalisée par Sprint (en story points).</p>
+                    <div class="def"><strong>Utilité :</strong> Planifier les prochains Sprints.</div>
+                    <span class="tag"><i class="fas fa-gauge-high"></i> Capacité</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : RETROSPECTIVES ============ -->
+        <section id="section-retrospectives" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-undo-alt"></i></div>
+                <div>
+                    <h2>Techniques de Rétrospective</h2>
+                    <div class="subtitle">Amélioration continue</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3><i class="fas fa-rose"></i> Rose / Épine / Bourgeon</h3>
+                    <p><strong>Rose :</strong> Ce qui a bien fonctionné.<br>
+                        <strong>Épine :</strong> Ce qui n'a pas fonctionné.<br>
+                        <strong>Bourgeon :</strong> Ce qui pourrait être amélioré.</p>
+                    <span class="tag"><i class="fas fa-flower"></i> Positif</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-4"></i> 4 Ls</h3>
+                    <p><strong>Liked :</strong> Ce que j'ai aimé.<br>
+                        <strong>Learned :</strong> Ce que j'ai appris.<br>
+                        <strong>Lacked :</strong> Ce qui a manqué.<br>
+                        <strong>Longed for :</strong> Ce que je souhaite pour le futur.</p>
+                    <span class="tag"><i class="fas fa-list"></i> Structure</span>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-star"></i> Starfish</h3>
+                    <p><strong>Continuer :</strong> Ce qu'on continue.<br>
+                        <strong>Faire plus :</strong> Ce qu'on doit accentuer.<br>
+                        <strong>Commencer :</strong> Ce qu'on doit lancer.<br>
+                        <strong>Arrêter :</strong> Ce qu'on doit cesser.<br>
+                        <strong>Faire moins :</strong> Ce qu'on doit réduire.</p>
+                    <span class="tag"><i class="fas fa-sea"></i> 5 axes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : TABLEAUX COMPARATIFS ============ -->
+        <section id="section-comparatif" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-table"></i></div>
+                <div>
+                    <h2>Tableaux Comparatifs</h2>
+                    <div class="subtitle">Lean Startup · Agile · Scrum · Design Thinking</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <h3><i class="fas fa-rocket" style="color:var(--teal);"></i> Lean Startup vs Agile vs Scrum</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Critère</th><th>Lean Startup</th><th>Agile</th><th>Scrum</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Objectif principal</strong></td><td>Valider les hypothèses, trouver un modèle d'affaires</td><td>Livrer de la valeur rapidement</td><td>Gérer les projets complexes</td></tr>
+                        <tr><td><strong>Focus</strong></td><td>Apprentissage validé, MVP</td><td>Collaboration, adaptation</td><td>Processus, rôles, événements</td></tr>
+                        <tr><td><strong>Métrique clé</strong></td><td>Apprentissage validé</td><td>Valeur livrée</td><td>Vélocité</td></tr>
+                        <tr><td><strong>Cadence</strong></td><td>Boucles d'apprentissage</td><td>Itérations (Sprints)</td><td>Sprints fixes</td></tr>
+                        <tr><td><strong>Rôles</strong></td><td>Builders, Innovateurs</td><td>Équipe auto-organisée</td><td>PO, SM, Developers</td></tr>
+                        <tr><td><strong>Résultat</strong></td><td>Produit validé, modèle viable</td><td>Livraisons fréquentes</td><td>Incréments terminés</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="margin-top:2rem;"><i class="fas fa-lightbulb" style="color:var(--gold);"></i> Design Thinking vs Lean Startup vs Agile</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Critère</th><th>Design Thinking</th><th>Lean Startup</th><th>Agile</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Phase</strong></td><td>Découverte</td><td>Validation</td><td>Exécution</td></tr>
+                        <tr><td><strong>Question clé</strong></td><td>Que veulent les utilisateurs ?</td><td>Est-ce viable ?</td><td>Comment le construire ?</td></tr>
+                        <tr><td><strong>Méthode</strong></td><td>Empathie, prototypage</td><td>MVP, mesure, pivot</td><td>Itération, livraison</td></tr>
+                        <tr><td><strong>Résultat</strong></td><td>Concepts, prototypes</td><td>Produits validés</td><td>Incéments fonctionnels</td></tr>
+                        <tr><td><strong>Complémentarité</strong></td><td>Définit le besoin</td><td>Valide le modèle</td><td>Construit le produit</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-sitemap"></i> Synthèse — Le continuum de l'innovation</h4>
+                <p><strong>Design Thinking</strong> → <strong>Lean Startup</strong> → <strong>Agile</strong> → <strong>Scrum</strong></p>
+                <p style="margin-top:0.5rem;">Ces approches se complètent pour former un système complet : de la découverte des besoins à la livraison continue de valeur.</p>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : CAS PRATIQUES ============ -->
+        <section id="section-cas-pratiques" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-briefcase"></i></div>
+                <div>
+                    <h2>Cas pratiques détaillés</h2>
+                    <div class="subtitle">Application concrète des concepts</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="case-box">
+                <strong><i class="fas fa-store"></i> Cas 1 : E-commerce — Refonte du tunnel d'achat</strong>
+                <p><strong>Contexte :</strong> Taux d'abandon de panier élevé (68%). Design Thinking pour comprendre les utilisateurs (empathie, persona, journey map). Lean Startup pour tester des hypothèses avec un MVP (page de paiement simplifiée). Scrum pour itérer sur les améliorations.</p>
+                <p><strong>Résultat :</strong> Réduction de 35% du taux d'abandon en 3 mois.</p>
+                <p><strong>Leçons :</strong> L'empathie utilisateur + validation rapide + itérations = succès.</p>
+            </div>
+            <div class="case-box">
+                <strong><i class="fas fa-mobile-alt"></i> Cas 2 : Application mobile — Nouvelle fonctionnalité de chat</strong>
+                <p><strong>Contexte :</strong> Lean Canvas pour définir la proposition de valeur. MVP avec une version de base du chat. Scrum pour le développement itératif.</p>
+                <p><strong>Résultat :</strong> Livré en 4 Sprints, NPS +15.</p>
+            </div>
+            <div class="case-box">
+                <strong><i class="fas fa-hospital-alt"></i> Cas 3 : Santé — Plateforme de gestion de rendez-vous</strong>
+                <p><strong>Contexte :</strong> Design Thinking pour comprendre les besoins des médecins. Lean Startup pour tester avec un prototype. Scrum pour le développement avec DoD stricte.</p>
+                <p><strong>Résultat :</strong> Zéro incident critique en 6 Sprints.</p>
+            </div>
+            <div class="case-box">
+                <strong><i class="fas fa-robot"></i> Cas 4 : IA — Chatbot pour support client</strong>
+                <p><strong>Contexte :</strong> Lean Canvas pour définir le modèle. MVP avec un chatbot basique. Agile pour itérer sur le modèle d'IA.</p>
+                <p><strong>Résultat :</strong> Taux de résolution de 80% en 8 Sprints.</p>
+            </div>
+            <div class="case-box" style="border-left-color:var(--teal);">
+                <strong><i class="fas fa-rocket"></i> Cas 5 : Lean Startup — FoodTech</strong>
+                <p><strong>Contexte :</strong> Startup de livraison de repas. Lean Canvas initial, MVP avec un site web minimaliste pour tester la demande. Pivot après 2 mois vers un modèle d'abonnement.</p>
+                <p><strong>Résultat :</strong> Validation du modèle d'abonnement, croissance de 200% en 6 mois.</p>
+                <p><strong>Leçon :</strong> Le pivot était justifié par les données d'apprentissage validé.</p>
+            </div>
+            <div class="case-box" style="border-left-color:var(--gold);">
+                <strong><i class="fas fa-cogs"></i> Cas 6 : Industrie — Maintenance prédictive</strong>
+                <p><strong>Contexte :</strong> Équipe cross-fonctionnelle. Design Thinking pour comprendre les opérateurs. Lean Startup pour tester les modèles. Scrum pour livrer les itérations.</p>
+                <p><strong>Résultat :</strong> Réduction de 50% des arrêts imprévus.</p>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : GLOSSAIRE ============ -->
+        <section id="section-glossaire" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-book"></i></div>
+                <div>
+                    <h2>Glossaire</h2>
+                    <div class="subtitle">Définitions clés</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div style="background:var(--white); border-radius:1.2rem; padding:1.8rem; border:1px solid #e2e8f0;">
+                <dl style="display:grid; gap:0.8rem;">
+                    <dt style="font-weight:700; color:var(--royal);"><i class="fas fa-check-circle"></i> Agile</dt>
+                    <dd style="margin-left:1.5rem;">Philosophie de développement basée sur l'itération, la collaboration et l'adaptation.</dd>
+                    <dt style="font-weight:700; color:var(--royal);"><i class="fas fa-check-circle"></i> Scrum</dt>
+                    <dd style="margin-left:1.5rem;">Framework Agile pour la gestion de projets complexes.</dd>
+                    <dt style="font-weight:700; color:var(--teal);"><i class="fas fa-check-circle"></i> Lean Startup</dt>
+                    <dd style="margin-left:1.5rem;">Méthodologie pour développer des produits en réduisant les risques et en accélérant l'apprentissage.</dd>
+                    <dt style="font-weight:700; color:var(--teal);"><i class="fas fa-check-circle"></i> MVP</dt>
+                    <dd style="margin-left:1.5rem;">Minimum Viable Product — version minimaliste pour tester les hypothèses.</dd>
+                    <dt style="font-weight:700; color:var(--gold);"><i class="fas fa-check-circle"></i> Design Thinking</dt>
+                    <dd style="margin-left:1.5rem;">Approche de résolution de problèmes centrée sur l'humain.</dd>
+                    <dt style="font-weight:700; color:var(--royal);"><i class="fas fa-check-circle"></i> Product Owner</dt>
+                    <dd style="margin-left:1.5rem;">Responsable de maximiser la valeur du produit.</dd>
+                    <dt style="font-weight:700; color:var(--royal);"><i class="fas fa-check-circle"></i> Scrum Master</dt>
+                    <dd style="margin-left:1.5rem;">Facilitateur et coach de l'équipe Scrum.</dd>
+                    <dt style="font-weight:700; color:var(--royal);"><i class="fas fa-check-circle"></i> Sprint</dt>
+                    <dd style="margin-left:1.5rem;">Période fixe (≤ 1 mois) pour créer un Incrément.</dd>
+                    <dt style="font-weight:700; color:var(--royal);"><i class="fas fa-check-circle"></i> Definition of Done (DoD)</dt>
+                    <dd style="margin-left:1.5rem;">Critères de qualité pour qu'un item soit "Terminé".</dd>
+                    <dt style="font-weight:700; color:var(--royal);"><i class="fas fa-check-circle"></i> Vélocité</dt>
+                    <dd style="margin-left:1.5rem;">Quantité de travail réalisée par Sprint.</dd>
+                    <dt style="font-weight:700; color:var(--teal);"><i class="fas fa-check-circle"></i> Pivot</dt>
+                    <dd style="margin-left:1.5rem;">Changement de stratégie basé sur les données d'apprentissage.</dd>
+                    <dt style="font-weight:700; color:var(--teal);"><i class="fas fa-check-circle"></i> Lean Canvas</dt>
+                    <dd style="margin-left:1.5rem;">Outil de modélisation d'affaires en 9 blocs pour les startups.</dd>
+                </dl>
+            </div>
+        </section>
+
+        <!-- ============ SECTION : QUIZ ============ -->
+        <section id="section-quiz" class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-question-circle"></i></div>
+                <div>
+                    <h2>Quiz Expert — 3 niveaux</h2>
+                    <div class="subtitle">Fondamentaux · Avancé · Management & Lean</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="quiz-selector" id="quizSelector">
+                <button class="quiz-tab active" data-quiz="0">📘 Fondamentaux (40)</button>
+                <button class="quiz-tab" data-quiz="1">📗 Avancé (40)</button>
+                <button class="quiz-tab" data-quiz="2">📊 Management & Lean (40)</button>
+            </div>
+
+            <div class="quiz-container" id="quizApp">
+                <div class="quiz-header">
+                    <span class="quiz-progress" id="progressDisplay"><i class="fas fa-list-ol"></i> Question <span id="currentQNum">1</span>/40</span>
+                    <span id="scoreDisplay" style="font-weight:600; display:flex; align-items:center; gap:8px;">
+                        <i class="fas fa-star" style="color:var(--gold);"></i> <span id="scoreValue">0</span> / 40
+                    </span>
+                </div>
+                <div id="questionContainer">
+                    <div class="question-text" id="questionText">Chargement des questions...</div>
+                    <div class="options" id="optionsContainer"></div>
+                </div>
+                <div class="quiz-actions">
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                        <button class="btn btn-secondary" id="prevBtn"><i class="fas fa-arrow-left"></i> Précédent</button>
+                        <button class="btn btn-secondary" id="nextBtn">Suivant <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                        <button class="btn btn-gold" id="exportPdfBtn"><i class="fas fa-file-pdf"></i> Export PDF</button>
+                        <button class="btn btn-success" id="submitQuizBtn"><i class="fas fa-check-circle"></i> Résultat</button>
+                    </div>
+                </div>
+                <div id="resultArea" style="margin-top:1.5rem; text-align:center;"></div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <div style="text-align:center; margin-top:3rem; padding-top:1.8rem; border-top:1px solid #e2e8f0; color:var(--silver); font-size:0.85rem;">
+            <i class="fas fa-database"></i> 120 questions · Formation expert Agile · v5.0 · Lean Startup inclus
+        </div>
+    </main>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMessage">Action effectuée</span></div>
+
+    <script>
+        (function() {
+            // ============================================================
+            // 1. SIDEBAR NAVIGATION
+            // ============================================================
+            const navLinks = document.querySelectorAll('.sidebar-nav a');
+            const sections = document.querySelectorAll('.section');
+            const progressCircle = document.getElementById('progressCircle');
+            const progressText = document.getElementById('progressText');
+
+            let visited = new Set();
+            let totalSections = sections.length;
+
+            function updateProgress() {
+                const pct = Math.round((visited.size / totalSections) * 100);
+                const circumference = 88;
+                const offset = circumference - (pct / 100) * circumference;
+                if (progressCircle) {
+                    progressCircle.style.strokeDashoffset = offset;
+                }
+                if (progressText) {
+                    progressText.textContent = pct + '%';
+                }
+            }
+
+            function navigateTo(sectionId) {
+                sections.forEach(s => s.classList.remove('active'));
+                const target = document.getElementById('section-' + sectionId);
+                if (target) {
+                    target.classList.add('active');
+                    visited.add(sectionId);
+                    updateProgress();
+                }
+                navLinks.forEach(a => a.classList.remove('active'));
+                const activeLink = document.querySelector(`.sidebar-nav a[data-section="${sectionId}"]`);
+                if (activeLink) activeLink.classList.add('active');
+                document.querySelector('.main-content').scrollTop = 0;
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.dataset.section;
+                    if (section) {
+                        navigateTo(section);
+                    }
+                });
+            });
+
+            visited.add('fundamentals');
+            updateProgress();
+
+            // ============================================================
+            // 2. QUIZ ENGINE — 3 quizzes avec questions Lean Startup
+            // ============================================================
+            const quizBank = {
+                fundamentals: [
+                    { q: "Quelle est la durée maximale recommandée pour un Sprint ?", opts: ["1 mois", "2 mois", "3 semaines",
+                            "1 semaine"
+                        ], ans: 0 },
+                    { q: "Qui est responsable de la gestion du Product Backlog ?", opts: ["Scrum Master", "Product Owner",
+                            "L'équipe", "Le management"
+                        ], ans: 1 },
+                    { q: "Quel événement Scrum sert à planifier le travail du Sprint ?", opts: ["Daily Scrum",
+                            "Sprint Planning", "Sprint Review", "Rétrospective"
+                        ], ans: 1 },
+                    { q: "Quel pilier Scrum n'existe pas ?", opts: ["Transparence", "Inspection", "Adaptation", "Vélocité"],
+                        ans: 3 },
+                    { q: "Qui peut annuler un Sprint ?", opts: ["Le Product Owner", "Le Scrum Master", "L'équipe",
+                            "Le management"
+                        ], ans: 0 },
+                    { q: "Que contient le Sprint Backlog ?", opts: ["Les tâches sélectionnées pour le Sprint",
+                            "Tous les items du Product Backlog", "Les bugs", "Les rétrospectives"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que la 'Definition of Done' ?", opts: ["Une checklist de qualité", "Un engagement",
+                            "Un artefact", "Un rôle"
+                        ], ans: 0 },
+                    { q: "Quel est l'objectif du Daily Scrum ?", opts: ["Inspecter l'avancement", "Résoudre les problèmes",
+                            "Planifier le Sprint", "Faire la rétrospective"
+                        ], ans: 0 },
+                    { q: "Quel rôle aide l'équipe à appliquer Scrum ?", opts: ["Product Owner", "Scrum Master", "Developer",
+                            "Manager"
+                        ], ans: 1 },
+                    { q: "Combien de temps dure la Sprint Review (max) pour un Sprint d'1 mois ?", opts: ["4 heures",
+                            "2 heures", "8 heures", "1 heure"
+                        ], ans: 0 },
+                    { q: "Quel est l'engagement du Product Backlog ?", opts: ["Objectif de produit", "Objectif de Sprint",
+                            "Definition of Done", "Incrément"
+                        ], ans: 0 },
+                    { q: "Les Developers sont-ils auto-organisés ?", opts: ["Oui", "Non", "Parfois", "Seulement le SM"],
+                        ans: 0 },
+                    { q: "Qui définit les items du Sprint Backlog ?", opts: ["Le PO", "Les Developers", "Le SM",
+                            "Toute l'équipe"
+                        ], ans: 1 },
+                    { q: "Quel événement permet d'améliorer le processus ?", opts: ["Sprint Review", "Rétrospective",
+                            "Daily Scrum", "Planning"
+                        ], ans: 1 },
+                    { q: "La vélocité est-elle une mesure obligatoire ?", opts: ["Oui", "Non", "Seulement pour le PO",
+                            "Seulement pour le SM"
+                        ], ans: 1 },
+                    { q: "Quelle est la fréquence du Daily Scrum ?", opts: ["Chaque jour", "Tous les 2 jours",
+                            "Une fois par semaine", "Au besoin"
+                        ], ans: 0 },
+                    { q: "Scrum est-il un processus ou un framework ?", opts: ["Framework", "Processus", "Méthode",
+                            "Règle"
+                        ], ans: 0 },
+                    { q: "Que signifie l'acronyme DoD ?", opts: ["Definition of Done", "Definition of Delivery",
+                            "Development over Done", "Data on Demand"
+                        ], ans: 0 },
+                    { q: "Le Product Owner peut-il être aussi Developer ?", opts: ["Oui, mais déconseillé", "Non, jamais",
+                            "Seulement si le SM est d'accord", "Oui, toujours"
+                        ], ans: 0 },
+                    { q: "Quel est l'événement le plus court ?", opts: ["Daily Scrum", "Sprint Planning", "Rétrospective",
+                            "Sprint Review"
+                        ], ans: 0 },
+                    { q: "Quelle valeur Scrum n'est pas dans le Guide ?", opts: ["Courage", "Focus", "Efficacité",
+                            "Ouverture"
+                        ], ans: 2 },
+                    { q: "Qui est responsable de l'Objectif de Sprint ?", opts: ["Les Developers", "Le Product Owner",
+                            "Le Scrum Master", "Toute l'équipe"
+                        ], ans: 0 },
+                    { q: "Un Sprint peut-il être annulé avant sa fin ?", opts: ["Oui, par le PO", "Non",
+                            "Seulement par le SM", "Oui, par l'équipe"
+                        ], ans: 0 },
+                    { q: "Quel artefact contient l'Objectif de produit ?", opts: ["Product Backlog", "Sprint Backlog",
+                            "Incrément", "Definition of Done"
+                        ], ans: 0 },
+                    { q: "La Rétrospective a lieu après la Sprint Review ?", opts: ["Oui", "Non, avant", "En même temps",
+                            "Quand l'équipe le décide"
+                        ], ans: 0 },
+                    { q: "Combien de rôles sont définis dans Scrum ?", opts: ["3", "2", "4", "1"], ans: 0 },
+                    { q: "Le Scrum Master est-il un manager ?", opts: ["Non, c'est un facilitateur", "Oui", "Parfois",
+                            "Un chef de projet"
+                        ], ans: 0 },
+                    { q: "L'Incément est-il l'ensemble des travaux terminés ?", opts: ["Oui, selon la DoD",
+                            "Non, seulement le Sprint en cours", "Seulement le code", "Le produit final"
+                        ], ans: 0 },
+                    { q: "Que signifie 'cross-fonctionnel' pour les Developers ?", opts: [
+                            "Ils possèdent toutes les compétences nécessaires", "Ils changent de rôle",
+                            "Ils sont spécialisés", "Ils travaillent seuls"
+                        ], ans: 0 },
+                    { q: "Le Sprint Planning est-il un événement de 8h max ?", opts: ["Oui, pour un Sprint d'1 mois",
+                            "Non, 4h max", "2h max", "1h max"
+                        ], ans: 0 },
+                    { q: "La transparence est un pilier : que permet-elle ?", opts: ["Visibilité du processus",
+                            "Cacher les erreurs", "Ralentir", "Complexifier"
+                        ], ans: 0 },
+                    { q: "Qui participe à la Sprint Review ?", opts: ["L'équipe Scrum et les parties prenantes",
+                            "Seulement le PO", "Seulement les Devs", "Le SM seul"
+                        ], ans: 0 },
+                    { q: "L'Objectif de Sprint est défini pendant le Sprint Planning ?", opts: ["Oui",
+                            "Non, pendant la Review", "Avant le Sprint", "Pendant le Daily"
+                        ], ans: 0 },
+                    { q: "Un Sprint peut-il être plus long qu'1 mois ?", opts: ["Non, c'est la limite", "Oui, 6 semaines",
+                            "Seulement pour les gros projets", "Jamais"
+                        ], ans: 0 },
+                    { q: "Le Product Owner est-il responsable du ROI ?", opts: ["Oui, indirectement", "Non, c'est le SM",
+                            "L'équipe", "Le management"
+                        ], ans: 0 },
+                    { q: "Quel est le but de la Rétrospective ?", opts: ["Améliorer le processus", "Valider le produit",
+                            "Planifier le prochain Sprint", "Faire le point sur les bugs"
+                        ], ans: 0 },
+                    { q: "Les Daily Scrum sont-ils réservés aux Developers ?", opts: ["Oui", "Non, toute l'équipe",
+                            "PO et SM aussi", "Seulement le SM"
+                        ], ans: 0 },
+                    { q: "Le Product Backlog est-il dynamique ?", opts: ["Oui, il évolue", "Non, figé",
+                            "Seulement pendant le Sprint", "Change chaque année"
+                        ], ans: 0 },
+                    { q: "La 'Definition of Done' est-elle partagée par l'équipe ?", opts: ["Oui, engagement commun",
+                            "Non, décidée par le PO", "Par le SM", "Par le client"
+                        ], ans: 0 },
+                    { q: "Quelle est la durée max d'un Daily Scrum ?", opts: ["15 minutes", "30 minutes", "1 heure",
+                            "10 minutes"
+                        ], ans: 0 }
+                ],
+                advanced: [
+                    { q: "Scrum est-il adapté à tous les projets ?", opts: ["Non, surtout complexes", "Oui, tous",
+                            "Seulement les petits", "Uniquement IT"
+                        ], ans: 0 },
+                    { q: "L'Incément doit-il être 'Terminé' selon la DoD ?", opts: ["Oui", "Non, livré tel quel",
+                            "Seulement pour le PO", "C'est facultatif"
+                        ], ans: 0 },
+                    { q: "Le Scrum Master peut-il être aussi Developer ?", opts: ["Oui, mais déconseillé", "Non",
+                            "Parfois", "Seulement pour les petits projets"
+                        ], ans: 0 },
+                    { q: "Quel événement sert à recueillir les retours des parties prenantes ?", opts: ["Sprint Review",
+                            "Rétrospective", "Daily", "Planning"
+                        ], ans: 0 },
+                    { q: "Le Sprint Backlog est-il modifiable pendant le Sprint ?", opts: ["Oui, par les Developers",
+                            "Non, figé", "Seulement par le PO", "Par le SM"
+                        ], ans: 0 },
+                    { q: "Que signifie 'auto-organisation' ?", opts: ["L'équipe gère son propre travail", "Le PO dirige",
+                            "Le SM décide", "Le management contrôle"
+                        ], ans: 0 },
+                    { q: "Combien de temps dure la Rétrospective max pour un Sprint d'1 mois ?", opts: ["3 heures",
+                            "4 heures", "2 heures", "1 heure"
+                        ], ans: 0 },
+                    { q: "Le Product Owner est-il un membre de l'équipe Scrum ?", opts: ["Oui", "Non", "Externe",
+                            "Consultant"
+                        ], ans: 0 },
+                    { q: "Quelle est la fréquence des Sprints ?", opts: ["Continue, l'un après l'autre", "Avec des pauses",
+                            "Quand le PO décide", "Tous les mois"
+                        ], ans: 0 },
+                    { q: "La Sprint Review inclut-elle une démonstration du produit ?", opts: ["Oui", "Non", "Parfois",
+                            "Seulement si le client le demande"
+                        ], ans: 0 },
+                    { q: "Design Thinking : quelle est la première phase ?", opts: ["Empathiser", "Définir", "Idéer",
+                            "Prototyper"
+                        ], ans: 0 },
+                    { q: "Le Design Thinking est-il linéaire ?", opts: ["Non, itératif", "Oui", "Parfois",
+                            "Seulement en fin de projet"
+                        ], ans: 0 },
+                    { q: "Quel est l'objectif du prototypage en Design Thinking ?", opts: ["Tester rapidement des idées",
+                            "Livrer un produit final", "Documenter", "Planifier"
+                        ], ans: 0 },
+                    { q: "Agile et Design Thinking sont-ils complémentaires ?", opts: ["Oui", "Non", "Parfois", "Opposés"],
+                        ans: 0 },
+                    { q: "Que signifie SAFe ?", opts: ["Scaled Agile Framework", "Simple Agile Framework",
+                            "System Agile Framework", "Scrum Agile Framework"
+                        ], ans: 0 },
+                    { q: "Que signifie LeSS ?", opts: ["Large-Scale Scrum", "Lean Scrum", "Light Scrum", "Legacy Scrum"],
+                        ans: 0 },
+                    { q: "Quel est l'objectif du Value Stream Mapping ?", opts: ["Visualiser les flux de valeur",
+                            "Planifier les Sprints", "Gérer le backlog", "Faire la rétrospective"
+                        ], ans: 0 },
+                    { q: "Le leadership Agile est basé sur :", opts: ["La confiance et l'empowerment", "Le contrôle",
+                            "La hiérarchie", "La centralisation"
+                        ], ans: 0 },
+                    { q: "Quelle est la première étape du cycle de vie d'une user story ?", opts: ["Écrire la story",
+                            "Estimer", "Planifier", "Tester"
+                        ], ans: 0 },
+                    { q: "Le burndown chart mesure :", opts: ["Le travail restant", "Le travail accompli", "La vélocité",
+                            "Le flux"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que le 'refinement' du Product Backlog ?", opts: [
+                            "Maintenir et prioriser le backlog", "Planifier le Sprint", "Faire la rétrospective",
+                            "Livrer le produit"
+                        ], ans: 0 },
+                    { q: "Que signifie 'potentially releasable' ?", opts: [
+                            "L'incrément est techniquement prêt à être livré", "Le produit est terminé",
+                            "Le Sprint est fini", "Le backlog est vide"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce qu'un 'impediment' ?", opts: ["Un obstacle qui bloque l'équipe",
+                            "Une user story prioritaire", "Un artefact", "Un événement Scrum"
+                        ], ans: 0 },
+                    { q: "Que mesure la vélocité ?", opts: ["La quantité de travail par Sprint",
+                            "La qualité du code", "Le nombre de bugs", "La satisfaction client"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que l' 'affinity estimation' ?", opts: [
+                            "Une technique d'estimation collective rapide", "Une méthode de planning",
+                            "Un outil de gestion de projet", "Une technique de priorisation"
+                        ], ans: 0 },
+                    { q: "Que signifie 'cross-functional team' ?", opts: [
+                            "Une équipe qui possède toutes les compétences nécessaires",
+                            "Une équipe avec des membres de plusieurs départements",
+                            "Une équipe qui travaille sur plusieurs projets",
+                            "Une équipe qui change de rôle"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que le 'technical debt' ?", opts: [
+                            "La dette technique liée aux choix d'implémentation", "Une dette financière",
+                            "Un problème de management", "Un artefact Scrum"
+                        ], ans: 0 },
+                    { q: "Que signifie 'CI/CD' ?", opts: ["Continuous Integration / Continuous Delivery",
+                            "Continuous Improvement / Continuous Deployment",
+                            "Client Integration / Client Delivery", "Code Integration / Code Deployment"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que le 'lead time' en Kanban ?", opts: ["Le temps entre la demande et la livraison",
+                            "Le temps de développement", "Le temps de test", "Le temps de planification"
+                        ], ans: 0 },
+                    { q: "Que signifie 'WIP' en Kanban ?", opts: ["Work In Progress", "Work In Process",
+                            "Work In Planning", "Work In Production"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce qu'un 'SAFe Program Increment' ?", opts: ["Une période de 8 à 12 semaines",
+                            "Un Sprint", "Une release", "Un backlog"
+                        ], ans: 0 },
+                    { q: "Quel est le rôle du 'Release Train Engineer' dans SAFe ?", opts: [
+                            "Faciliter le train de release", "Gérer le portfolio", "Être le Product Owner",
+                            "Être le Scrum Master"
+                        ], ans: 0 },
+                    { q: "Que signifie 'Nexus Integration Team' ?", opts: [
+                            "Équipe qui coordonne l'intégration entre plusieurs équipes Scrum",
+                            "Une équipe de développement", "Une équipe de test", "Une équipe de management"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que le 'backlog grooming' ?", opts: ["Le refinement du backlog",
+                            "La suppression du backlog", "La création du backlog", "La livraison du backlog"
+                        ], ans: 0 },
+                    { q: "Que mesure le 'cycle time' en Kanban ?", opts: ["Le temps de réalisation d'un item",
+                            "Le temps entre deux livraisons", "Le temps de planning",
+                            "Le temps de rétrospective"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que 'l'agile coaching' ?", opts: ["Accompagner les équipes dans leur transformation",
+                            "Faire du management", "Développer des fonctionnalités", "Gérer le budget"
+                        ], ans: 0 },
+                    { q: "Que signifie 'scaling' en Agile ?", opts: [
+                            "Étendre les pratiques Agile à plusieurs équipes ou à l'organisation",
+                            "Réduire la taille de l'équipe", "Augmenter le nombre de Sprints",
+                            "Changer de framework"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce qu'une 'release' dans un contexte Agile ?", opts: [
+                            "Une livraison de fonctionnalités à l'utilisateur",
+                            "Un Sprint", "Un événement Scrum", "Un artefact"
+                        ], ans: 0 },
+                    { q: "Que signifie 'MVP' en Agile ?", opts: ["Minimum Viable Product", "Minimum Valuable Product",
+                            "Maximum Viable Product", "Maximum Valuable Product"
+                        ], ans: 0 },
+                    { q: "Quel est l'objectif de la 'Sprint Review' ?", opts: [
+                            "Inspecter l'incrément et adapter le backlog", "Planifier le prochain Sprint",
+                            "Faire la rétrospective", "Résoudre les problèmes"
+                        ], ans: 0 }
+                ],
+                management_lean: [
+                    // Management questions + Lean Startup questions
+                    { q: "Quel est le rôle du management dans un contexte Agile ?", opts: [
+                            "Soutenir l'équipe et fournir les ressources", "Diriger les équipes",
+                            "Prendre les décisions techniques", "Gérer le backlog"
+                        ], ans: 0 },
+                    { q: "Que signifie 'servant-leadership' ?", opts: [
+                            "Un leader qui sert son équipe", "Un leader qui commande", "Un leader qui délègue",
+                            "Un leader qui contrôle"
+                        ], ans: 0 },
+                    { q: "Comment le management peut-il favoriser l'auto-organisation ?", opts: [
+                            "En faisant confiance et en donnant de l'autonomie", "En contrôlant chaque étape",
+                            "En prenant toutes les décisions", "En imposant des process"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce qu'un 'anti-pattern' en management Agile ?", opts: ["Micro-management",
+                            "Auto-organisation", "Coaching", "Facilitation"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que le Lean Startup ?", opts: [
+                            "Une méthodologie pour développer des produits en réduisant les risques",
+                            "Un framework de développement", "Une méthode de gestion de projet",
+                            "Un outil de marketing"
+                        ], ans: 0 },
+                    { q: "Que signifie MVP dans le Lean Startup ?", opts: ["Minimum Viable Product",
+                            "Maximum Viable Product", "Minimum Valuable Product", "Maximum Valuable Product"
+                        ], ans: 0 },
+                    { q: "Quelle est la boucle d'apprentissage du Lean Startup ?", opts: ["Build-Measure-Learn",
+                            "Plan-Do-Check-Act", "Design-Prototype-Test", "Think-Build-Release"
+                        ], ans: 0 },
+                    { q: "Que signifie 'Pivot' dans le Lean Startup ?", opts: [
+                            "Changer de stratégie basé sur les données", "Continuer sur la même voie",
+                            "Abandonner le projet", "Changer d'équipe"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que le Lean Canvas ?", opts: ["Un outil de modélisation d'affaires en 9 blocs",
+                            "Un tableau de bord", "Un framework de développement", "Une méthode de gestion"
+                        ], ans: 0 },
+                    { q: "Quel est l'objectif du Lean Startup ?", opts: ["Valider les hypothèses et trouver un modèle viable",
+                            "Livrer rapidement", "Gérer les équipes", "Optimiser les coûts"
+                        ], ans: 0 },
+                    { q: "Comment le management Agile gère-t-il les conflits ?", opts: [
+                            "Par la transparence et la facilitation", "En les ignorant", "Par la force",
+                            "En les reportant"
+                        ], ans: 0 },
+                    { q: "Quelle est la responsabilité du management dans la transformation Agile ?", opts: [
+                            "Montrer l'exemple et soutenir le changement", "Rester en retrait",
+                            "Changer uniquement les outils", "Imposer les pratiques"
+                        ], ans: 0 },
+                    { q: "Que signifie 'empowerment' en contexte Agile ?", opts: [
+                            "Donner du pouvoir et de l'autonomie à l'équipe",
+                            "Prendre le pouvoir sur l'équipe", "Réduire les responsabilités",
+                            "Contrôler l'équipe"
+                        ], ans: 0 },
+                    { q: "Comment le management mesure-t-il la performance en Agile ?", opts: [
+                            "Par la valeur livrée et la satisfaction", "Par les heures travaillées",
+                            "Par le nombre de fonctionnalités", "Par le budget consommé"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que le 'change management' en contexte Agile ?", opts: [
+                            "Gérer le changement organisationnel", "Gérer les changements de code",
+                            "Gérer les changements de process", "Gérer les changements d'équipe"
+                        ], ans: 0 },
+                    { q: "Quel est l'avantage d'un MVP ?", opts: [
+                            "Tester les hypothèses avec un minimum d'investissement",
+                            "Livrer un produit complet", "Gagner du temps de développement",
+                            "Réduire les coûts de production"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce qu'un 'pivot de valeur' ?", opts: [
+                            "Changer la proposition de valeur", "Changer le segment client",
+                            "Changer le canal de distribution", "Changer l'équipe"
+                        ], ans: 0 },
+                    { q: "Comment le management Agile gère-t-il les risques ?", opts: [
+                            "Par l'inspection et l'adaptation continue", "En les évitant",
+                            "En les transférant", "En les ignorant"
+                        ], ans: 0 },
+                    { q: "Quel est le rôle du management dans le 'Scaling' Agile ?", opts: [
+                            "Définir la stratégie et allouer les ressources", "Faire le développement",
+                            "Gérer le backlog", "Faire la rétrospective"
+                        ], ans: 0 },
+                    { q: "Que signifie 'culture Agile' ?", opts: [
+                            "Un ensemble de valeurs et de comportements", "Un outil de gestion",
+                            "Un framework", "Un rôle"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que le 'leadership adaptatif' ?", opts: [
+                            "Un leadership qui s'adapte au contexte", "Un leadership rigide",
+                            "Un leadership autoritaire", "Un leadership passif"
+                        ], ans: 0 },
+                    { q: "Comment le management Agile gère-t-il la performance individuelle ?", opts: [
+                            "Par le coaching et le feedback continu", "Par des évaluations annuelles",
+                            "Par des sanctions", "Par des promotions"
+                        ], ans: 0 },
+                    { q: "Quelle est l'importance de la confiance en management Agile ?", opts: [
+                            "Essentielle pour l'autonomie et la collaboration", "Peu importante",
+                            "Nécessaire uniquement pour le PO", "Nécessaire uniquement pour le SM"
+                        ], ans: 0 },
+                    { q: "Que signifie 'transformation Agile' ?", opts: [
+                            "Le passage d'une organisation vers l'Agilité", "Un changement d'outils",
+                            "Un nouveau projet", "Une nouvelle équipe"
+                        ], ans: 0 },
+                    { q: "Comment le management Agile soutient-il l'apprentissage ?", opts: [
+                            "En encourageant la formation et le partage", "En limitant la formation",
+                            "En imposant des formations", "En ignorant l'apprentissage"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que le 'management visuel' ?", opts: [
+                            "Utiliser des tableaux et des métriques pour la transparence",
+                            "Gérer avec des rapports", "Gérer avec des réunions", "Gérer avec des emails"
+                        ], ans: 0 },
+                    { q: "Comment le management Agile gère-t-il le budget ?", opts: [
+                            "Par une approche flexible et orientée valeur", "Par un budget fixe",
+                            "Par un budget annuel", "Par un budget détaillé"
+                        ], ans: 0 },
+                    { q: "Quel est le rôle du management dans l'amélioration continue ?", opts: [
+                            "Encourager et faciliter les rétrospectives", "Ignorer les améliorations",
+                            "Imposer des changements", "Faire les actions lui-même"
+                        ], ans: 0 },
+                    { q: "Que signifie 'OKR' en contexte Agile ?", opts: [
+                            "Objectives and Key Results", "Operational Knowledge Repository",
+                            "Organizational Key Resources", "Official Key Review"
+                        ], ans: 0 },
+                    { q: "Comment le management Agile aligne-t-il les OKRs avec les Sprints ?", opts: [
+                            "En définissant des objectifs stratégiques et en les déclinant en Sprints",
+                            "En ignorant les OKRs", "En les imposant aux équipes",
+                            "En les utilisant seulement pour le PO"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que le 'management 3.0' ?", opts: [
+                            "Une approche de management Agile centrée sur les personnes",
+                            "Une version de management", "Un outil de gestion", "Un framework"
+                        ], ans: 0 },
+                    { q: "Quelle est la différence entre management traditionnel et Agile ?", opts: [
+                            "Le management Agile est plus collaboratif et adaptatif",
+                            "Le management Agile est plus rigide", "Le management Agile est plus lent",
+                            "Le management Agile est plus coûteux"
+                        ], ans: 0 },
+                    { q: "Comment le management Agile gère-t-il la rétention des talents ?", opts: [
+                            "Par la satisfaction, l'autonomie et l'évolution", "Par des primes",
+                            "Par des promotions", "Par des contrats"
+                        ], ans: 0 },
+                    { q: "Qu'est-ce que le 'leadership situationnel' ?", opts: [
+                            "Un leadership qui s'adapte au niveau de maturité de l'équipe",
+                            "Un leadership fixe", "Un leadership autoritaire",
+                            "Un leadership passif"
+                        ], ans: 0 },
+                    { q: "Comment le management Agile gère-t-il la communication ?", opts: [
+                            "Par la transparence et la communication directe", "Par des rapports formels",
+                            "Par des emails", "Par des réunions formelles"
+                        ], ans: 0 },
+                    { q: "Quelle est l'importance de l'exemplarité en management Agile ?", opts: [
+                            "Le management doit montrer l'exemple", "Peu importante",
+                            "Nécessaire uniquement pour le SM", "Nécessaire uniquement pour le PO"
+                        ], ans: 0 },
+                    { q: "Comment le management Agile gère-t-il les parties prenantes ?", opts: [
+                            "Par la collaboration et la transparence", "En les ignorant",
+                            "En les contrôlant", "En les limitant"
+                        ], ans: 0 },
+                    { q: "Que signifie 'agile mindset' pour un manager ?", opts: [
+                            "Adopter les valeurs et principes Agile", "Utiliser des outils Agile",
+                            "Faire des Sprints", "Avoir un rôle Agile"
+                        ], ans: 0 },
+                    { q: "Comment le management Agile gère-t-il le stress et l'épuisement ?", opts: [
+                            "En favorisant un rythme soutenable et en écoutant l'équipe",
+                            "En ignorant le stress", "En augmentant la pression",
+                            "En ajoutant du travail"
+                        ], ans: 0 }
+                ]
+            };
+
+            function buildQuizSet(questions, targetSize) {
+                const result = [];
+                let idx = 0;
+                while (result.length < targetSize) {
+                    const q = questions[idx % questions.length];
+                    const opts = [...q.opts];
+                    if (idx > 10 && idx % 3 === 0) {
+                        const shuffled = [...opts];
+                        const correct = shuffled[q.ans];
+                        for (let i = shuffled.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                        }
+                        const newAns = shuffled.indexOf(correct);
+                        result.push({
+                            question: q.q,
+                            options: shuffled,
+                            answer: newAns !== -1 ? newAns : 0
+                        });
+                    } else {
+                        result.push({
+                            question: q.q,
+                            options: opts,
+                            answer: q.ans
+                        });
+                    }
+                    idx++;
+                }
+                return result;
+            }
+
+            const quizSets = [
+                buildQuizSet(quizBank.fundamentals, 40),
+                buildQuizSet(quizBank.advanced, 40),
+                buildQuizSet(quizBank.management_lean, 40)
+            ];
+
+            let currentQuizIndex = 0;
+            let currentQuestionIndex = 0;
+            let userAnswers = [];
+            let submitted = false;
+
+            const questionText = document.getElementById('questionText');
+            const optionsContainer = document.getElementById('optionsContainer');
+            const currentQNum = document.getElementById('currentQNum');
+            const scoreValue = document.getElementById('scoreValue');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitQuizBtn');
+            const exportPdfBtn = document.getElementById('exportPdfBtn');
+            const resultArea = document.getElementById('resultArea');
+            const quizTabs = document.querySelectorAll('.quiz-tab');
+
+            function getCurrentQuestions() {
+                return quizSets[currentQuizIndex] || [];
+            }
+
+            function renderQuestion(index) {
+                const questions = getCurrentQuestions();
+                if (!questions.length) return;
+                const q = questions[index];
+                if (!q) return;
+                questionText.textContent = `${index+1}. ${q.question}`;
+                currentQNum.textContent = index + 1;
+
+                optionsContainer.innerHTML = '';
+                q.options.forEach((opt, i) => {
+                    const div = document.createElement('div');
+                    div.className = 'option';
+                    if (userAnswers[index] === i) div.classList.add('selected');
+                    const letter = document.createElement('span');
+                    letter.className = 'letter';
+                    letter.textContent = String.fromCharCode(65 + i);
+                    div.appendChild(letter);
+                    const txt = document.createElement('span');
+                    txt.textContent = opt;
+                    div.appendChild(txt);
+                    div.addEventListener('click', function() {
+                        if (submitted) return;
+                        userAnswers[index] = i;
+                        renderQuestion(index);
+                        updateScore();
+                    });
+                    optionsContainer.appendChild(div);
+                });
+
+                prevBtn.disabled = (index === 0);
+                nextBtn.disabled = (index === questions.length - 1);
+            }
+
+            function updateScore() {
+                if (submitted) return;
+                const questions = getCurrentQuestions();
+                let correct = 0;
+                for (let i = 0; i < questions.length; i++) {
+                    if (userAnswers[i] !== null && userAnswers[i] === questions[i].answer) {
+                        correct++;
+                    }
+                }
+                scoreValue.textContent = correct;
+            }
+
+            function showResult() {
+                submitted = true;
+                const questions = getCurrentQuestions();
+                let correct = 0;
+                for (let i = 0; i < questions.length; i++) {
+                    if (userAnswers[i] !== null && userAnswers[i] === questions[i].answer) {
+                        correct++;
+                    }
+                }
+                const total = questions.length;
+                const pct = Math.round((correct / total) * 100);
+                let msg = '';
+                if (pct >= 90) msg = '🏆 Expert ! Maîtrise parfaite.';
+                else if (pct >= 70) msg = '✅ Très bonne compréhension.';
+                else if (pct >= 50) msg = '📖 Revoyez les fondamentaux.';
+                else msg = '📚 Reprenez les bases et le glossaire.';
+                resultArea.innerHTML =
+                    `<div class="result-box"><i class="fas fa-check-circle"></i> Résultat : ${correct}/${total} (${pct}%) — ${msg}</div>`;
+                scoreValue.textContent = correct;
+                submitBtn.disabled = true;
+                showToast('Quiz terminé ! Résultat affiché.');
+            }
+
+            function goTo(index) {
+                const questions = getCurrentQuestions();
+                if (index < 0) index = 0;
+                if (index >= questions.length) index = questions.length - 1;
+                currentQuestionIndex = index;
+                renderQuestion(currentQuestionIndex);
+            }
+
+            function switchQuiz(index) {
+                currentQuizIndex = index;
+                const questions = getCurrentQuestions();
+                userAnswers = new Array(questions.length).fill(null);
+                currentQuestionIndex = 0;
+                submitted = false;
+                resultArea.innerHTML = '';
+                submitBtn.disabled = false;
+                renderQuestion(0);
+                updateScore();
+                quizTabs.forEach((tab, i) => {
+                    tab.classList.toggle('active', i === index);
+                });
+                showToast(`Quiz ${['Fondamentaux','Avancé','Management & Lean'][index]} chargé (${questions.length} questions)`);
+            }
+
+            prevBtn.addEventListener('click', () => goTo(currentQuestionIndex - 1));
+            nextBtn.addEventListener('click', () => goTo(currentQuestionIndex + 1));
+
+            submitBtn.addEventListener('click', function() {
+                if (submitted) return;
+                const allAnswered = userAnswers.every(a => a !== null);
+                if (!allAnswered) {
+                    if (!confirm('Toutes les questions ne sont pas répondues. Soumettre quand même ?')) return;
+                }
+                showResult();
+            });
+
+            quizTabs.forEach((tab, idx) => {
+                tab.addEventListener('click', function() {
+                    switchQuiz(idx);
+                });
+            });
+
+            exportPdfBtn.addEventListener('click', function() {
+                if (typeof window.jspdf === 'undefined') {
+                    showToast('Erreur : bibliothèque PDF non chargée.');
+                    return;
+                }
+                if (!submitted) {
+                    if (!confirm('Le quiz n\'est pas terminé. Exporter quand même ?')) return;
+                }
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF('p', 'mm', 'a4');
+                const margin = 20;
+                let y = margin;
+
+                const quizName = ['Fondamentaux', 'Avancé', 'Management & Lean'][currentQuizIndex];
+                const questions = getCurrentQuestions();
+
+                doc.setFontSize(18);
+                doc.setFont('helvetica', 'bold');
+                doc.text(`Quiz Agile - ${quizName}`, margin, y);
+                y += 10;
+
+                let correct = 0;
+                for (let i = 0; i < questions.length; i++) {
+                    if (userAnswers[i] !== null && userAnswers[i] === questions[i].answer) {
+                        correct++;
+                    }
+                }
+                const pct = Math.round((correct / questions.length) * 100);
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`Score : ${correct}/${questions.length} (${pct}%)`, margin, y);
+                y += 8;
+
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'normal');
+                for (let i = 0; i < questions.length; i++) {
+                    const q = questions[i];
+                    const userAns = userAnswers[i];
+                    const isCorrect = userAns !== null && userAns === q.answer;
+                    const status = isCorrect ? '✅' : '❌';
+                    const userText = userAns !== null ? q.options[userAns] : 'Non répondu';
+                    const correctText = q.options[q.answer];
+                    const line =
+                        `${i+1}. ${q.question.substring(0, 45)}${q.question.length > 45 ? '...' : ''} | ${status} | V: ${userText} | R: ${correctText}`;
+                    doc.text(line, margin, y);
+                    y += 4.5;
+                    if (y > 275) {
+                        doc.addPage();
+                        y = margin;
+                    }
+                }
+
+                doc.save(`quiz_agile_${quizName}.pdf`);
+                showToast('PDF exporté avec succès !');
+            });
+
+            function showToast(msg) {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toastMessage');
+                toastMessage.textContent = msg;
+                toast.classList.add('show');
+                clearTimeout(toast._timeout);
+                toast._timeout = setTimeout(() => toast.classList.remove('show'), 3000);
+            }
+
+            switchQuiz(0);
+
+            document.addEventListener('keydown', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                if (e.key === 'ArrowLeft') prevBtn.click();
+                if (e.key === 'ArrowRight') nextBtn.click();
+            });
+
+        })();
+    </script>
+</body>
+</html>
